@@ -26,6 +26,17 @@ public class Bank {
      * @return boolean
      */
     public boolean withdrawMoney(final BankAccount bankAccount, final double amount) {
+        if (amount <= 0) {
+            return false;
+        }
+        if (bankAccount == null) {
+            return false;
+
+        }
+        double newBalance = bankAccount.getAccountBalance() - amount;
+        bankAccount.setAccountBalance(newBalance);
+        return true;
+
         /*
          * Implement this function
          */
@@ -42,6 +53,16 @@ public class Bank {
      * @return boolean
      */
     public boolean depositMoney(final BankAccount bankAccount, final double amount) {
+        if (amount <= 0) {
+            return false;
+        }
+        if (bankAccount == null) {
+            return false;
+
+        }
+        double newBalance = bankAccount.getAccountBalance() + amount;
+        bankAccount.setAccountBalance(newBalance);
+        return true;
         /*
          * Implement this function
          */
@@ -61,6 +82,18 @@ public class Bank {
 
     public boolean transferMoney(final BankAccount source, final BankAccount destination,
             final double amount) {
+        if (amount <= 0) {
+            return false;
+        }
+        if (source == null || destination == null) {
+            return false;
+
+        }
+        double newBalance1 = source.getAccountBalance() - amount;
+        double newBalance2 = destination.getAccountBalance() + amount;
+        source.setAccountBalance(newBalance1);
+        destination.setAccountBalance(newBalance2);
+        return true;
         /*
          * Implement this function
          */
@@ -74,18 +107,31 @@ public class Bank {
      */
 
     public void changeOwnerName(final BankAccount bankAccount, final String name) {
+        if (bankAccount == null || name == null) {
+
+        } else {
+            bankAccount.setOwnerName(name);
+
+        }
+
         /*
          * Implement this function
          */
     }
 
-    public static int totalAccounts = 0;
+    private static int totalAccounts = 0;
+
+    public static void addNumber() {
+        totalAccounts++;
+
+    }
     /**
      * Uses static variable to get number of bank accounts opened.
      *
      * @return the total number of accounts
      */
     public static int getNumberOfAccount() {
+        return totalAccounts;
         /*
          * Implement this function
          */
